@@ -11,10 +11,10 @@ const useFetchOrderData = () => {
 
   return useQuery(["orderData"], fetchOrderData, {
     refetchInterval: 5000,
-    refetchOnWindowFocus: false,
     select: (data) => {
       const orderData: IOrderData[] = data.data
         ?.filter((v: IOrderData) => v.transaction_time.includes(TODAY_DATE))
+
         .filter((v: IOrderData) => {
           if (DROPDOWN_OPTIONS.includes(status as string)) {
             return v.status === (status === "True" ? true : false);
@@ -29,15 +29,19 @@ const useFetchOrderData = () => {
               .includes(name?.toLowerCase() as string);
           }
           return v;
+        })
+
+        .sort((a: IOrderData, b: IOrderData) => {
+          if (sortOption === "id") return b.id - a.id;
+          else if (sortOption === "transaction_time") {
+            return (
+              +new Date(b.transaction_time) - +new Date(a.transaction_time)
+            );
+          }
+          return a.id - b.id;
         });
 
-      return orderData.sort((a, b) => {
-        if (sortOption === "id") return b.id - a.id;
-        else if (sortOption === "transaction_time") {
-          return +new Date(b.transaction_time) - +new Date(a.transaction_time);
-        }
-        return a.id - b.id;
-      });
+      return orderData;
     },
   });
 };
