@@ -1,6 +1,6 @@
 import { useSearchParams } from "react-router-dom";
 
-const useGetSearchParams = () => {
+export const useGetSearchParams = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const pageNum =
@@ -13,5 +13,3 @@ const useGetSearchParams = () => {
 
   return { pageNum, name, status, sortOption, searchParams, setSearchParams };
 };
-
-export default useGetSearchParams;

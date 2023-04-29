@@ -2,11 +2,11 @@ import { useQuery } from "@tanstack/react-query";
 import { fetchOrderData } from "../api/apis";
 import { DROPDOWN_OPTIONS } from "../components/OrderAdmin/FilterDropdown";
 import type { IOrderData } from "../types";
-import useGetSearchParams from "./useGetSearchParams";
+import { useGetSearchParams } from "./useGetSearchParams";
 
 const TODAY_DATE = "2023-03-08";
 
-const useFetchOrderData = () => {
+export const useFetchOrderData = () => {
   const { name, status, sortOption } = useGetSearchParams();
 
   return useQuery(["orderData"], fetchOrderData, {
@@ -45,5 +45,3 @@ const useFetchOrderData = () => {
     },
   });
 };
-
-export default useFetchOrderData;

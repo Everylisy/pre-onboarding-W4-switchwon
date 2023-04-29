@@ -10,8 +10,8 @@ import Pagination from "../components/OrderAdmin/Pagination";
 import SearchInput from "../components/OrderAdmin/SearchInput";
 import Table from "../components/Table/Table";
 
-import useFetchOrderData from "../hooks/useFetchOrderData";
-import useGetSearchParams from "../hooks/useGetSearchParams";
+import { useFetchOrderData } from "../hooks/useFetchOrderData";
+import { useGetSearchParams } from "../hooks/useGetSearchParams";
 
 import type { IOrderData } from "../types";
 
