@@ -4,7 +4,7 @@ export const useGetSearchParams = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const pageNum =
-    Number(searchParams.get("page")) === 0 || null
+    Number(searchParams.get("page")) <= 0
       ? 1
       : Number(searchParams.get("page"));
   const name = searchParams.get("name");

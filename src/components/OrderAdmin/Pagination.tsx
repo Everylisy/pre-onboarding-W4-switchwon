@@ -10,19 +10,24 @@ const Pagination = ({
 }: IPropsPagination) => {
   useEffect(() => {
     window.scrollTo(0, 0);
+
     if (pageNum > totalPageCount) {
       searchParams.set("page", String(totalPageCount));
+      setPageNum(searchParams);
+    }
+    if (isNaN(pageNum)) {
+      searchParams.set("page", "1");
       setPageNum(searchParams);
     }
   }, [pageNum, searchParams]);
 
   const prevBtnHandler = () => {
-    searchParams.set("page", String(pageNum - 1));
+    pageNum > 0 && searchParams.set("page", String(pageNum - 1));
     setPageNum(searchParams);
   };
 
   const nextBtnHandler = () => {
-    searchParams.set("page", String(pageNum + 1));
+    totalPageCount > pageNum && searchParams.set("page", String(pageNum + 1));
     setPageNum(searchParams);
   };
 
@@ -33,7 +38,7 @@ const Pagination = ({
 
   return (
     <>
-      <Button onClick={prevBtnHandler} disabled={pageNum === 1}>
+      <Button onClick={prevBtnHandler} isDisabled={pageNum === 1}>
         &larr; 이전
       </Button>
 
@@ -50,7 +55,7 @@ const Pagination = ({
           </Button>
         ))}
 
-      <Button onClick={nextBtnHandler} disabled={pageNum === totalPageCount}>
+      <Button onClick={nextBtnHandler} isDisabled={pageNum === totalPageCount}>
         다음 &rarr;
       </Button>
     </>
