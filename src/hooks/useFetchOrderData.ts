@@ -2,6 +2,7 @@ import { useToast } from "@chakra-ui/react";
 import { useQuery } from "@tanstack/react-query";
 import { fetchOrderData } from "../api/apis";
 import { DROPDOWN_OPTIONS } from "../components/OrderAdmin/FilterDropdown";
+import { HEADER_TRANS } from "../components/Table/TableHeader";
 import type { IOrderData } from "../types";
 import { useGetSearchParams } from "./useGetSearchParams";
 
@@ -45,8 +46,8 @@ export const useFetchOrderData = () => {
           })
 
           .sort((a: IOrderData, b: IOrderData) => {
-            if (sortOption === "id") return b.id - a.id;
-            else if (sortOption === "transaction_time") {
+            if (sortOption === HEADER_TRANS[0]) return b.id - a.id;
+            else if (sortOption === HEADER_TRANS[1]) {
               return (
                 +new Date(b.transaction_time) - +new Date(a.transaction_time)
               );
