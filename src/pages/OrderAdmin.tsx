@@ -1,7 +1,7 @@
 import Layout, {
   FooterWrapper,
-  HeaderWrapper,
   MainWrapper,
+  NavWrapper,
 } from "../components/common/Layout";
 
 import LoadingSpinner from "../components/common/LoadingSpinner";
@@ -19,34 +19,40 @@ const LIMIT = 50;
 
 const OrderAdmin = () => {
   const { data, isLoading } = useFetchOrderData();
-  const { pageNum, searchParams, setSearchParams } = useGetSearchParams();
-  const offset = (pageNum - 1) * LIMIT;
+  const { page, searchParams, setSearchParams } = useGetSearchParams();
+  const offset = (page - 1) * LIMIT;
 
   const headers: string[] = Object.keys({ ...data }[0] || {});
   const items: IOrderData[] = Object.values(data || {});
-  const slicedItems = items.slice(offset, offset + LIMIT);
 
-  const totalPageCount = Math.ceil(items.length / LIMIT);
+  const totalPage = Math.ceil(items.length / LIMIT);
+
+  const orderData = (data: IOrderData[]) => {
+    if (items) {
+      const slicedItems = data.slice(offset, offset + LIMIT);
+      return slicedItems;
+    }
+  };
 
   if (isLoading) return <LoadingSpinner />;
 
   return (
     <Layout>
-      <HeaderWrapper>
+      <NavWrapper>
         <SearchInput />
         <FilterDropdown />
-      </HeaderWrapper>
+      </NavWrapper>
 
       <MainWrapper>
-        <Table headers={headers} items={slicedItems} />
+        <Table headers={headers} items={orderData(items)} />
       </MainWrapper>
 
       <FooterWrapper>
         <Pagination
-          totalPageCount={totalPageCount}
-          pageNum={pageNum}
+          page={page}
+          setPage={setSearchParams}
+          totalPage={totalPage}
           searchParams={searchParams}
-          setPageNum={setSearchParams}
         />
       </FooterWrapper>
     </Layout>

@@ -22,7 +22,7 @@ const Wrapper = styled.div`
   padding: 6vh 35px 6vh 30px;
 `;
 
-export const HeaderWrapper = styled.header`
+export const NavWrapper = styled.nav`
   display: flex;
   align-items: center;
   justify-content: center;

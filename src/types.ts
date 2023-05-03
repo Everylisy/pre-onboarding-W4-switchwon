@@ -11,7 +11,7 @@ export interface IOrderData {
 
 export interface IPropsTable {
   headers: string[];
-  items: IOrderData[];
+  items?: IOrderData[];
 }
 
 export interface IPropsTableHeader {
@@ -19,13 +19,13 @@ export interface IPropsTableHeader {
 }
 
 export interface IPropsPagination {
-  totalPageCount: number;
-  pageNum: number;
-  searchParams: URLSearchParams;
-  setPageNum: (
+  page: number;
+  setPage: (
     nextInit?:
       | URLSearchParamsInit
       | ((prev: URLSearchParams) => URLSearchParamsInit),
     navigateOpts?: NavigateOptions,
   ) => void;
+  totalPage: number;
+  searchParams: URLSearchParams;
 }

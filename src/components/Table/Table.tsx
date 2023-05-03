@@ -10,7 +10,7 @@ import TableHeader from "./TableHeader";
 
 const Table = ({ headers, items }: IPropsTable) => {
   return (
-    <TableContainer>
+    <TableContainer as="section">
       <ChakraTable variant="simple">
         <Thead>
           <TableHeader headers={headers} />
