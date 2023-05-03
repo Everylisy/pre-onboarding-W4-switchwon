@@ -10,12 +10,8 @@ export interface IOrderData {
 }
 
 export interface IPropsTable {
-  headers: string[];
-  items?: IOrderData[];
-}
-
-export interface IPropsTableHeader {
-  headers: string[];
+  headers?: string[];
+  transactions?: IOrderData[];
 }
 
 export interface IPropsPagination {

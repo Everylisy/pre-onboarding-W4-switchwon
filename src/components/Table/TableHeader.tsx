@@ -1,6 +1,6 @@
 import { Button, Th, Tr } from "@chakra-ui/react";
 import { useSearchParams } from "react-router-dom";
-import type { IPropsTableHeader } from "../../types";
+import type { IPropsTable } from "../../types";
 
 export const HEADER_TRANS = [
   "주문 ID",
@@ -11,10 +11,10 @@ export const HEADER_TRANS = [
   "거래액",
 ];
 
-const TableHeader = ({ headers }: IPropsTableHeader) => {
+const TableHeader = ({ headers }: IPropsTable) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const sortOption = searchParams.get("sort");
-  const translatedHeaders = headers.map((_, idx) => HEADER_TRANS[idx]);
+  const translatedHeaders = headers?.map((_, idx) => HEADER_TRANS[idx]);
 
   const sortHandler = (header: string) => {
     if (header === sortOption) searchParams.set("sort", "");
@@ -24,7 +24,7 @@ const TableHeader = ({ headers }: IPropsTableHeader) => {
 
   return (
     <Tr>
-      {translatedHeaders.map((header) => (
+      {translatedHeaders?.map((header) => (
         <Th
           key={header}
           fontSize="md"

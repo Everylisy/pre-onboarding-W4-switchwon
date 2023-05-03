@@ -1,17 +1,17 @@
 import { Td, Tr } from "@chakra-ui/react";
 import type { IPropsTable } from "../../types";
 
-const TableBody = ({ headers, items }: IPropsTable) => {
+const TableBody = ({ transactions }: IPropsTable) => {
   return (
     <>
-      {items.map((item, idx) => (
-        <Tr key={idx}>
-          {headers.map((header) => (
-            <Td key={header + idx}>
-              {/* todo : fix type error */}
-              {String(item[header])}
-            </Td>
-          ))}
+      {transactions?.map((transaction) => (
+        <Tr key={transaction.id}>
+          <Td>{transaction.id}</Td>
+          <Td>{transaction.transaction_time}</Td>
+          <Td>{transaction.status ? "완료" : "미완료"}</Td>
+          <Td>{transaction.customer_id}</Td>
+          <Td>{transaction.customer_name}</Td>
+          <Td>{transaction.currency}</Td>
         </Tr>
       ))}
     </>

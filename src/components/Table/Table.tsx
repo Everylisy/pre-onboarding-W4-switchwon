@@ -8,16 +8,16 @@ import type { IPropsTable } from "../../types";
 import TableBody from "./TableBody";
 import TableHeader from "./TableHeader";
 
-const Table = ({ headers, items }: IPropsTable) => {
+const Table = ({ headers, transactions }: IPropsTable) => {
   return (
-    <TableContainer as="section">
+    <TableContainer as="section" textAlign="center">
       <ChakraTable variant="simple">
         <Thead>
           <TableHeader headers={headers} />
         </Thead>
 
         <Tbody>
-          <TableBody headers={headers} items={items} />
+          <TableBody transactions={transactions} />
         </Tbody>
       </ChakraTable>
     </TableContainer>

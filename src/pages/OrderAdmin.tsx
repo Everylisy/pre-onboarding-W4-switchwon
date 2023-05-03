@@ -23,14 +23,14 @@ const OrderAdmin = () => {
   const offset = (page - 1) * LIMIT;
 
   const headers: string[] = Object.keys({ ...data }[0] || {});
-  const items: IOrderData[] = Object.values(data || {});
+  const transactions: IOrderData[] = Object.values(data || {});
 
-  const totalPage = Math.ceil(items.length / LIMIT);
+  const totalPage = Math.ceil(transactions.length / LIMIT);
 
   const orderData = (data: IOrderData[]) => {
-    if (items) {
-      const slicedItems = data.slice(offset, offset + LIMIT);
-      return slicedItems;
+    if (transactions) {
+      const slicedTransactions = data.slice(offset, offset + LIMIT);
+      return slicedTransactions;
     }
   };
 
@@ -44,7 +44,7 @@ const OrderAdmin = () => {
       </NavWrapper>
 
       <MainWrapper>
-        <Table headers={headers} items={orderData(items)} />
+        <Table headers={headers} transactions={orderData(transactions)} />
       </MainWrapper>
 
       <FooterWrapper>
