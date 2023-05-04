@@ -4,24 +4,24 @@ import {
   Tbody,
   Thead,
 } from "@chakra-ui/react";
-import type { IPropsTable } from "../../types";
+import React from "react";
 import TableBody from "./TableBody";
 import TableHeader from "./TableHeader";
 
-const Table = ({ headers, transactions }: IPropsTable) => {
+const Table = () => {
   return (
     <TableContainer as="section" textAlign="center">
       <ChakraTable variant="simple">
         <Thead>
-          <TableHeader headers={headers} />
+          <TableHeader />
         </Thead>
 
         <Tbody>
-          <TableBody transactions={transactions} />
+          <TableBody />
         </Tbody>
       </ChakraTable>
     </TableContainer>
   );
 };
 
-export default Table;
+export default React.memo(Table);

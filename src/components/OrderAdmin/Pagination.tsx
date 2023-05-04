@@ -16,8 +16,6 @@ const Pagination = ({ totalPage }: IPropsPagination) => {
       searchParams.set("page", "1");
       setPage(searchParams);
     }
-
-    setPage(searchParams);
   }, [page, totalPage]);
 
   const prevBtnHandler = () => {
@@ -55,7 +53,7 @@ const Pagination = ({ totalPage }: IPropsPagination) => {
         &larr; 이전
       </Button>
 
-      {pagesInBlock.map((pageNumber, idx) => {
+      {pagesInBlock.map((pageNumber) => {
         if (pageNumber === null) {
           return null;
         }
@@ -63,7 +61,7 @@ const Pagination = ({ totalPage }: IPropsPagination) => {
           <Button
             variant="ghost"
             isActive={pageNumber === page}
-            key={idx + pageNumber}
+            key={pageNumber}
             onClick={() => numberBtnHandler(pageNumber - 1)}
           >
             {pageNumber}

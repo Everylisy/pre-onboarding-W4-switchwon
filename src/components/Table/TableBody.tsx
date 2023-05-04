@@ -1,10 +1,18 @@
 import { Td, Tr } from "@chakra-ui/react";
-import type { IPropsTable } from "../../types";
+import { useFetchOrderData } from "../../hooks/useFetchOrderData";
+import { useGetSearchParams } from "../../hooks/useGetSearchParams";
+import { LIMIT } from "../../pages/OrderAdmin";
 
-const TableBody = ({ transactions }: IPropsTable) => {
+const TableBody = () => {
+  const { data } = useFetchOrderData();
+  const { page } = useGetSearchParams();
+  const offset = (page - 1) * LIMIT;
+
+  const slicedTransactions = Object.values(data).slice(offset, offset + LIMIT);
+
   return (
     <>
-      {transactions?.map((transaction) => (
+      {slicedTransactions?.map((transaction) => (
         <Tr key={transaction.id}>
           <Td>{transaction.id}</Td>
           <Td>{transaction.transaction_time}</Td>

@@ -1,6 +1,6 @@
 import { Button, Th, Tr } from "@chakra-ui/react";
 import { useSearchParams } from "react-router-dom";
-import type { IPropsTable } from "../../types";
+import { useFetchOrderData } from "../../hooks/useFetchOrderData";
 
 export const HEADER_TRANS = [
   "주문 ID",
@@ -11,9 +11,12 @@ export const HEADER_TRANS = [
   "거래액",
 ];
 
-const TableHeader = ({ headers }: IPropsTable) => {
+const TableHeader = () => {
+  const { data } = useFetchOrderData();
   const [searchParams, setSearchParams] = useSearchParams();
   const sortOption = searchParams.get("sort");
+
+  const headers: string[] = Object.keys({ ...data }[0]);
   const translatedHeaders = headers?.map((_, idx) => HEADER_TRANS[idx]);
 
   const sortHandler = (header: string) => {
