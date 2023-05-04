@@ -1,5 +1,3 @@
-import type { NavigateOptions, URLSearchParamsInit } from "react-router-dom";
-
 export interface IOrderData {
   id: number;
   transaction_time: string;
@@ -15,13 +13,5 @@ export interface IPropsTable {
 }
 
 export interface IPropsPagination {
-  page: number;
-  setPage: (
-    nextInit?:
-      | URLSearchParamsInit
-      | ((prev: URLSearchParams) => URLSearchParamsInit),
-    navigateOpts?: NavigateOptions,
-  ) => void;
   totalPage: number;
-  searchParams: URLSearchParams;
 }

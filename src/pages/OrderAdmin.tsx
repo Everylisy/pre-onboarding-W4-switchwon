@@ -19,7 +19,7 @@ const LIMIT = 50;
 
 const OrderAdmin = () => {
   const { data, isLoading } = useFetchOrderData();
-  const { page, searchParams, setSearchParams } = useGetSearchParams();
+  const { page } = useGetSearchParams();
   const offset = (page - 1) * LIMIT;
 
   const headers: string[] = Object.keys({ ...data }[0] || {});
@@ -48,12 +48,7 @@ const OrderAdmin = () => {
       </MainWrapper>
 
       <FooterWrapper>
-        <Pagination
-          page={page}
-          setPage={setSearchParams}
-          totalPage={totalPage}
-          searchParams={searchParams}
-        />
+        <Pagination totalPage={totalPage} />
       </FooterWrapper>
     </Layout>
   );
