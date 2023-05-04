@@ -4,7 +4,8 @@ export const useGetSearchParams = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const page =
-    Number(searchParams.get("page")) <= 0
+    Number(searchParams.get("page")) <= 0 ||
+    isNaN(Number(searchParams.get("page")))
       ? 1
       : Number(searchParams.get("page"));
   const name = searchParams.get("name");

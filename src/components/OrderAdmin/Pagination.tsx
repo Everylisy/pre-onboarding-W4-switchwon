@@ -16,6 +16,8 @@ const Pagination = ({ totalPage }: IPropsPagination) => {
       searchParams.set("page", "1");
       setPage(searchParams);
     }
+
+    setPageBlock(Math.ceil(page / 5));
   }, [page, totalPage]);
 
   const prevBtnHandler = () => {
