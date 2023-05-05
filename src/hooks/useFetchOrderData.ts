@@ -1,5 +1,6 @@
 import { useToast } from "@chakra-ui/react";
 import { useQuery } from "@tanstack/react-query";
+import { useMemo } from "react";
 import { fetchOrderData } from "../api/apis";
 import { DROPDOWN_OPTIONS } from "../components/OrderAdmin/FilterDropdown";
 import { HEADER_TRANS } from "../components/Table/TableHeader";
@@ -25,40 +26,38 @@ export const useFetchOrderData = () => {
             : "error connecting to the server";
         toast({ title: title, status: "error" });
       },
-      select: (data) => {
-        const orderData: IOrderData[] = data.data
-          ?.filter((v: IOrderData) => v.transaction_time.includes(TODAY_DATE))
-
-          .filter((v: IOrderData) => {
-            if (DROPDOWN_OPTIONS.includes(status as string)) {
-              return v.status === (status === "True" ? true : false);
-            }
-            return v;
-          })
-
-          .filter((v: IOrderData) => {
-            if (name) {
-              return v.customer_name
-                .toLowerCase()
-                .includes(name?.toLowerCase() as string);
-            }
-            return v;
-          })
-
-          .sort((a: IOrderData, b: IOrderData) => {
-            if (sortOption === HEADER_TRANS[0]) return b.id - a.id;
-            else if (sortOption === HEADER_TRANS[1]) {
-              return (
-                +new Date(b.transaction_time) - +new Date(a.transaction_time)
-              );
-            }
-            return a.id - b.id;
-          });
-
-        return orderData;
-      },
     },
   );
 
-  return { data, isLoading };
+  const orderData: IOrderData[] = useMemo(() => {
+    if (isLoading) {
+      return fallback;
+    }
+
+    return data?.data
+      ?.filter((v: IOrderData) => v.transaction_time.includes(TODAY_DATE))
+      .filter((v: IOrderData) => {
+        if (DROPDOWN_OPTIONS.includes(status as string)) {
+          return v.status === (status === "True" ? true : false);
+        }
+        return v;
+      })
+      .filter((v: IOrderData) => {
+        if (name) {
+          return v.customer_name
+            .toLowerCase()
+            .includes(name?.toLowerCase() as string);
+        }
+        return v;
+      })
+      .sort((a: IOrderData, b: IOrderData) => {
+        if (sortOption === HEADER_TRANS[0]) return b.id - a.id;
+        else if (sortOption === HEADER_TRANS[1]) {
+          return +new Date(b.transaction_time) - +new Date(a.transaction_time);
+        }
+        return a.id - b.id;
+      });
+  }, [data, name, status, sortOption]);
+
+  return { data: orderData, isLoading };
 };
