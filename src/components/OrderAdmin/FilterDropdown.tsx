@@ -1,3 +1,4 @@
+import { Select } from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import { useSearchParams } from "react-router-dom";
 
@@ -12,11 +13,12 @@ const FilterDropdown = () => {
   };
 
   return (
-    <SelectWrapper>
-      <select
+    <div>
+      <Select
         onChange={changeSelectHandler}
-        id="status-select"
         value={searchParams.get("status") || ""}
+        size="sm"
+        variant="filled"
       >
         <option value="">주문상태: 전체</option>
         {DROPDOWN_OPTIONS.map((option) => (
@@ -24,13 +26,9 @@ const FilterDropdown = () => {
             {option}
           </option>
         ))}
-      </select>
-    </SelectWrapper>
+      </Select>
+    </div>
   );
 };
-
-const SelectWrapper = styled.div`
-  border: 1px #9ca3af solid;
-`;
 
 export default FilterDropdown;
