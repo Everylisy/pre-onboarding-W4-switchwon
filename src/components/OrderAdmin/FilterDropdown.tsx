@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { useSearchParams } from "react-router-dom";
 
-export const DROPDOWN_OPTIONS = ["True", "False"];
+export const DROPDOWN_OPTIONS = ["완료", "미완료"];
 
 const FilterDropdown = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -18,7 +18,7 @@ const FilterDropdown = () => {
         id="status-select"
         value={searchParams.get("status") || ""}
       >
-        <option value="">-- Status: All --</option>
+        <option value="">주문상태: 전체</option>
         {DROPDOWN_OPTIONS.map((option) => (
           <option key={option} value={option}>
             {option}

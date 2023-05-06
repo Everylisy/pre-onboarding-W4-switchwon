@@ -38,7 +38,7 @@ export const useFetchOrderData = () => {
       ?.filter((v: IOrderData) => v.transaction_time.includes(TODAY_DATE))
       .filter((v: IOrderData) => {
         if (DROPDOWN_OPTIONS.includes(status as string)) {
-          return v.status === (status === "True" ? true : false);
+          return v.status === (status === "완료" ? true : false);
         }
         return v;
       })
