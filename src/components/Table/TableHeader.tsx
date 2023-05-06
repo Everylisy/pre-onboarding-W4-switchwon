@@ -16,7 +16,7 @@ const TableHeader = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const sortOption = searchParams.get("sort");
 
-  const headers: string[] = Object.keys({ ...data }[0]);
+  const headers: string[] = Object.keys({ ...data }[0] || []);
   const translatedHeaders = headers?.map((_, idx) => HEADER_TRANS[idx]);
 
   const sortHandler = (header: string) => {
@@ -27,7 +27,7 @@ const TableHeader = () => {
 
   return (
     <Tr>
-      {translatedHeaders?.map((header) => (
+      {(data.length === 0 ? HEADER_TRANS : translatedHeaders)?.map((header) => (
         <Th
           key={header}
           fontSize="md"
