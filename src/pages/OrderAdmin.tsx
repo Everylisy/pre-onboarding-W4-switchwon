@@ -21,8 +21,6 @@ const OrderAdmin = () => {
 
   const totalPage = Math.ceil(Object.values(data).length / LIMIT);
 
-  if (isLoading) return <LoadingSpinner />;
-
   return (
     <Layout>
       <NavWrapper>
@@ -34,7 +32,8 @@ const OrderAdmin = () => {
 
       <MainWrapper>
         <Header content="주문 내역" />
-        <Table />
+        {isLoading && <LoadingSpinner />}
+        {!isLoading && <Table />}
       </MainWrapper>
 
       <FooterWrapper>
