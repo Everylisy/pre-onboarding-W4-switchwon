@@ -1,4 +1,4 @@
-import { Td, Tr } from "@chakra-ui/react";
+import { Td, Text, Tr } from "@chakra-ui/react";
 import { useFetchOrderData } from "../../hooks/useFetchOrderData";
 import { useGetSearchParams } from "../../hooks/useGetSearchParams";
 import { LIMIT } from "../../pages/OrderAdmin";
@@ -12,6 +12,16 @@ const TableBody = () => {
 
   return (
     <>
+      {slicedTransactions?.length === 0 && (
+        <Tr>
+          <Td colSpan={6}>
+            <Text marginTop="80px" textAlign="center" color="gray.500">
+              요청하신 결과가 없습니다.
+            </Text>
+          </Td>
+        </Tr>
+      )}
+
       {slicedTransactions?.map((transaction) => (
         <Tr key={transaction.id}>
           <Td>{transaction.id}</Td>
