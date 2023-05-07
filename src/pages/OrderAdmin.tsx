@@ -1,3 +1,4 @@
+import Header from "../components/common/Header";
 import Layout, {
   FooterWrapper,
   MainWrapper,
@@ -32,6 +33,7 @@ const OrderAdmin = () => {
       </NavWrapper>
 
       <MainWrapper>
+        <Header content="주문 내역" />
         <Table />
       </MainWrapper>
 

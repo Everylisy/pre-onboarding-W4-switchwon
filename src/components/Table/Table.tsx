@@ -10,7 +10,7 @@ import TableHeader from "./TableHeader";
 
 const Table = () => {
   return (
-    <TableContainer as="section" textAlign="center">
+    <TableContainer as="section">
       <ChakraTable variant="simple">
         <Thead>
           <TableHeader />
