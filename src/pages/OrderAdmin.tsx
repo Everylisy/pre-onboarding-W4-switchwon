@@ -1,6 +1,7 @@
 import Layout, {
   FooterWrapper,
   MainWrapper,
+  NavContainer,
   NavWrapper,
 } from "../components/common/Layout";
 
@@ -24,8 +25,10 @@ const OrderAdmin = () => {
   return (
     <Layout>
       <NavWrapper>
-        <SearchInput />
-        <FilterDropdown />
+        <NavContainer>
+          <SearchInput />
+          <FilterDropdown />
+        </NavContainer>
       </NavWrapper>
 
       <MainWrapper>

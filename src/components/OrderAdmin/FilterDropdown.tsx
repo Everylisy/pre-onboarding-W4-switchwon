@@ -18,7 +18,8 @@ const FilterDropdown = () => {
         onChange={changeSelectHandler}
         value={searchParams.get("status") || ""}
         size="sm"
-        variant="filled"
+        variant="unstyled"
+        color="GrayText"
       >
         <option value="">주문상태: 전체</option>
         {DROPDOWN_OPTIONS.map((option) => (

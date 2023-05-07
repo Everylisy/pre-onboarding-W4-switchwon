@@ -8,25 +8,37 @@ type IChildrenProps = {
 const Layout = ({ children }: IChildrenProps) => {
   return (
     <Wrapper>
-      <>{children}</>
+      <Container>{children}</Container>
     </Wrapper>
   );
 };
 
 export default Layout;
 
-const Wrapper = styled.div`
-  width: 100%;
-  max-width: 1200px;
+const Wrapper = styled.section`
+  display: block;
+`;
+
+const Container = styled.div`
   margin: 0 auto;
-  padding: 6vh 35px 6vh 30px;
+  max-width: 1060px;
 `;
 
 export const NavWrapper = styled.nav`
   display: flex;
   align-items: center;
-  justify-content: center;
-  margin: 24px 0 30px 0;
+  height: 32px;
+  margin: 100px 0 16px;
+  padding: 38px 30px;
+  border-radius: 12px;
+  background-color: white;
+`;
+
+export const NavContainer = styled.div`
+  width: 460px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 `;
 
 export const MainWrapper = styled.main`

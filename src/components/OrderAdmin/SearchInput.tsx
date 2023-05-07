@@ -15,11 +15,14 @@ const SearchInput = () => {
   return (
     <form onSubmit={submitHandler}>
       <Input
-        placeholder="고객 이름 검색"
         onChange={(e) => setSearchName(e.target.value)}
-        width="sm"
-        mr={8}
         value={serachName}
+        placeholder="고객 이름 검색"
+        variant="filled"
+        width={{ base: "48", sm: "48", md: "xs" }}
+        fontSize="sm"
+        borderRadius="3xl"
+        focusBorderColor="#A0AEC0"
       />
     </form>
   );
