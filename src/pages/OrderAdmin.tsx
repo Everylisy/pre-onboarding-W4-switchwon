@@ -32,8 +32,7 @@ const OrderAdmin = () => {
 
       <MainWrapper>
         <Header content="주문 내역" />
-        {isLoading && <LoadingSpinner />}
-        {!isLoading && <Table />}
+        {isLoading ? <LoadingSpinner /> : <Table />}
       </MainWrapper>
 
       <FooterWrapper>
