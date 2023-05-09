@@ -1,5 +1,5 @@
 import { Button } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useGetSearchParams } from "../../hooks/useGetSearchParams";
 import type { IPropsPagination } from "../../types";
 
@@ -12,8 +12,8 @@ const Pagination = ({ totalPage }: IPropsPagination) => {
   useEffect(() => {
     window.scrollTo(0, 0);
 
-    if (page > totalPage || isNaN(page)) {
-      searchParams.set("page", "1");
+    if (totalPage !== 0 && page > totalPage) {
+      searchParams.set("page", String(totalPage));
       setPage(searchParams);
     }
 
@@ -21,18 +21,22 @@ const Pagination = ({ totalPage }: IPropsPagination) => {
   }, [page, totalPage]);
 
   const prevBtnHandler = () => {
-    page > 0 && searchParams.set("page", String(page - 1));
-    setPage(searchParams);
-    if ((page - 1) % 5 === 0) {
-      setPageBlock((prevBlock) => prevBlock - 1);
+    if (page > 1) {
+      searchParams.set("page", String(page - 1));
+      setPage(searchParams);
+      if ((page - 1) % 5 === 0) {
+        setPageBlock((prevBlock) => prevBlock - 1);
+      }
     }
   };
 
   const nextBtnHandler = () => {
-    totalPage > page && searchParams.set("page", String(page + 1));
-    setPage(searchParams);
-    if (page % 5 === 0) {
-      setPageBlock((prevBlock) => prevBlock + 1);
+    if (totalPage > page) {
+      searchParams.set("page", String(page + 1));
+      setPage(searchParams);
+      if (page % 5 === 0) {
+        setPageBlock((prevBlock) => prevBlock + 1);
+      }
     }
   };
 
@@ -42,12 +46,14 @@ const Pagination = ({ totalPage }: IPropsPagination) => {
     setPage(searchParams);
   };
 
-  const pagesInBlock = Array(5)
-    .fill(0)
-    .map((_, idx) => {
-      const pageNumber = (pageBlock - 1) * 5 + idx + 1;
-      return pageNumber > totalPage ? null : pageNumber;
-    });
+  const pagesInBlock = useMemo(() => {
+    return Array(5)
+      .fill(0)
+      .map((_, idx) => {
+        const pageNumber = (pageBlock - 1) * 5 + idx + 1;
+        return pageNumber > totalPage ? null : pageNumber;
+      });
+  }, [pageBlock, totalPage]);
 
   return (
     <>
