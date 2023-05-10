@@ -18,8 +18,9 @@ export const LIMIT = 50;
 
 const OrderAdmin = () => {
   const { data, isLoading } = useFetchOrderData();
-
   const totalPage = Math.ceil(Object.values(data).length / LIMIT);
+
+  if (isLoading) return <LoadingSpinner />;
 
   return (
     <Layout>
@@ -32,7 +33,7 @@ const OrderAdmin = () => {
 
       <MainWrapper>
         <Header content="주문 내역" />
-        {isLoading ? <LoadingSpinner /> : <Table />}
+        <Table />
       </MainWrapper>
 
       <FooterWrapper>

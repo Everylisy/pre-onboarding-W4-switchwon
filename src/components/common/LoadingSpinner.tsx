@@ -1,10 +1,10 @@
-import { CircularProgress, Flex } from "@chakra-ui/react";
+import { Center, CircularProgress } from "@chakra-ui/react";
 
 const LoadingSpinner = () => {
   return (
-    <Flex justify="center" align="center">
+    <Center height="100vh">
       <CircularProgress color="blue" isIndeterminate size="16" />
-    </Flex>
+    </Center>
   );
 };
 
